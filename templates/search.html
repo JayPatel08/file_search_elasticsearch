@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
+  <link rel="icon" href="http://obj-cache.cloud.ruanbekker.com/favicon.ico">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+  <title>Documents Search</title>
+
+</head>
+<body>
+
+  <div class="container">
+    <div style="background:transparent !important" class="jumbotron">
+      <div style="font-family: 'Comfortaa', cursive;">
+        <p>
+          <center>
+          <font size="8">Search using ElasticSearch</font>
+          </center>
+        </p>
+      </div>
+    </div>
+
+  <div style="text-align:center" class="form-group">
+    <form id="upload-form" action="{{url_for('upload')}}" method="POST" enctype="multipart/form-data">
+      <input class="form-control input-lg" type="file" name="file" multiple><br>
+       <input type="text" class="form-control input-lg" name="index" placeholder="Enter index name" autofocus>
+      <input style="margin-top:10px" class="btn btn-primary btn-lg"  type="submit" value="send">
+    </form>
+  </div>
+
+
+
+    <br>
+    <br>
+    <br>
+
+    <br>
+    <br>
+
+    <form action="/search/results" method="post">
+      <div class="input-group">
+        <input type="text" class="form-control input-lg" name="input" placeholder="Search" autofocus>
+        <div class="input-group-btn">
+          <button class="btn btn-primary btn-lg" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+
+    <br><br>
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Index Name</th>
+        <th>Total Document</th>
+          <th>action</th>
+      </tr>
+    </thead>
+
+    {% for i in range(1,matrix_length) %}
+    <tbody id="table">
+      <tr class="tr">
+          <td>{{matrix_list[i][2]}}</td>
+          <td>{{matrix_list[i][6]}}</td>
+            <!--form action="/delete_index?name={{matrix_list[i][2]}}" method="GET"-->
+          <td class="delete"><a class="delete" href="/delete_index?name={{matrix_list[i][2]}}"><input class="btn btn-primary btn-lg " type="submit" value="Delete"></a></td>
+
+
+      </tr>
+    </tbody>
+        {% endfor %}
+  </table>
+
+      </div>
+    </div>
+  </body>
+</html>
